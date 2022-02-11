@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using HarmonyLib;
 
 // ReSharper disable UnusedType.Global
 // ReSharper disable UnusedMember.Global
@@ -6,7 +8,7 @@
 
 namespace ArtOfRallyMultiplayerMod.Control
 {
-    [HarmonyPatch(typeof(SettingsSelectable), "SetIndex")]
+    /*[HarmonyPatch(typeof(SettingsSelectable), "SetIndex")]
     public class DefaultGhost
     {
         public static void Postfix(SettingsSelectable __instance, string ___saveConstant)
@@ -16,6 +18,7 @@ namespace ArtOfRallyMultiplayerMod.Control
             var @int = SaveGame.GetInt(___saveConstant, 1);
             SaveGame.SetInt(___saveConstant, __instance.ghostList.IndexOf(@int));
             GhostManager.Instance.SetGhostType(@int);
+            GhostManager.Instance.SetGlobalGhostData(Test.ObjectToByteArray(Test.data));
         }
-    }
+    }*/
 }

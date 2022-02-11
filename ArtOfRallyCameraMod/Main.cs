@@ -66,6 +66,11 @@ namespace ArtOfRallyMultiplayerMod
             {
                 MultiplayerHUD.Players = response.GetValue<string[]>();
             });
+            Client.On("startEvent", response =>
+            {
+                if (GameEntryPoint.EventManager.status == EventStatusEnums.EventStatus.WAITING_TO_BEGIN) return;
+                GameEntryPoint.EventManager.StartEvent(response.GetValue<bool>());
+            });
             // TODO: sync map loading progress
             // Multiplayer
             /*Client.On(InitiateRally.MultiplayerLoadMap,
