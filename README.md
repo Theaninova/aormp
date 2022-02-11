@@ -27,7 +27,7 @@ server which forwards them to one or more observers.
 
 ## Usage
 
-[![](https://img.shields.io/github/v/release/Theaninova/aromp?label=Download%20Client%20Mod)](https://github.com/Theaninova/aormp/releases/latest)
+[![](https://img.shields.io/github/v/release/Theaninova/aormp?label=Download%20Client%20Mod)](https://github.com/Theaninova/aormp/releases/latest)
 [![](https://img.shields.io/github/v/release/Theaninova/aorc-server?label=Download%20Server)](https://github.com/Theaninova/aorc-server/releases/latest)
 
 1. Download the client and install it using the [Unity Mod Manager](https://www.nexusmods.com/site/mods/21/)
