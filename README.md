@@ -32,7 +32,28 @@ server which forwards them to one or more observers.
 
 1. Download the client and install it using the [Unity Mod Manager](https://www.nexusmods.com/site/mods/21/)
 2. *optional* Download the server for self-hosting
-3. TODO;
+
+## Using the mod in-game
+
+1. Make sure multiplayer is enabled in the mod options
+2. Make sure to use a custom lobby id
+3. Make sure both you and your opponent appear in the list in the top
+   left corner. *Note: as of now, only two players are supported.
+   More than two people in the same lobby will result in the ghost
+   jumping around*
+4. Start the same rally (only time attack supported for now). You are
+   Responsible to make sure that both of you select the same map, but
+   you're free to mix and match cars & classes (even maps, but welp that's
+   gonna look interesting lol)
+5. Make sure you select *any* ghost. If you don't select a ghost, you
+   won't see your opponent.
+   *Note: As of now, player chosen cars are not synced so you will
+   see whatever car the ghost would have*
+6. One of you starts the event, the other player will be started up
+   automatically
+
+*Note: There is zero ping compensation measures, so your opponent will
+already be further along the track than you see, depending on your ping*
 
 ## Features
 
