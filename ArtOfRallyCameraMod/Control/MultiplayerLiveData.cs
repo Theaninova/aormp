@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using System.Threading.Tasks;
-using ArtOfRallyChampionshipMod.Protocol;
+using ArtOfRallyMultiplayerMod.Protocol;
 using HarmonyLib;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ using UnityEngine;
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
 
-namespace ArtOfRallyChampionshipMod.Extraction.Live
+namespace ArtOfRallyMultiplayerMod.Control
 {
     public static class MultiplayerConnectionManager
     {
@@ -18,7 +18,7 @@ namespace ArtOfRallyChampionshipMod.Extraction.Live
         public static NativeMultiplayerCar? LastCar;
 
         public static MethodInfo? FadeCarInfo =
-            typeof(global::ReplayManager).GetMethod("FadeCar", BindingFlags.Instance | BindingFlags.NonPublic);
+            typeof(ReplayManager).GetMethod("FadeCar", BindingFlags.Instance | BindingFlags.NonPublic);
     }
 
     [HarmonyPatch(typeof(GhostManager), nameof(GhostManager.UpdateGhost))]
@@ -81,7 +81,7 @@ namespace ArtOfRallyChampionshipMod.Extraction.Live
         }
     }
 
-    [HarmonyPatch(typeof(global::CarController), "FixedUpdate")]
+    [HarmonyPatch(typeof(CarController), "FixedUpdate")]
     public class RecordKeyframe
     {
         public static void Postfix(Rigidbody? ___body)
@@ -91,7 +91,7 @@ namespace ArtOfRallyChampionshipMod.Extraction.Live
             if (___body == null) return;
 
             var stageSceneManager = GameEntryPoint.EventManager;
-            var time = stageSceneManager is global::StageSceneManager
+            var time = stageSceneManager is StageSceneManager
                 ? stageSceneManager.stageTimerManager != null ? stageSceneManager.stageTimerManager.GetStageTimeMS() :
                 0.0f
                 : 0.0f;

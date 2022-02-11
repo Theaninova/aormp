@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 using HarmonyLib;
 
-namespace ArtOfRallyChampionshipMod.Control
+namespace ArtOfRallyMultiplayerMod.Control
 {
     public static class InitiateRally
     {

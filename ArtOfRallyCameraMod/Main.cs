@@ -1,17 +1,13 @@
 ﻿using System.Reflection;
-using ArtOfRallyChampionshipMod.Control;
-using ArtOfRallyChampionshipMod.Extraction.Live;
-using ArtOfRallyChampionshipMod.Protocol;
+using ArtOfRallyMultiplayerMod.Control;
+using ArtOfRallyMultiplayerMod.Protocol;
 using HarmonyLib;
-using I2.Loc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using SocketIOClient;
 using SocketIOClient.Newtonsoft.Json;
 using SocketIOClient.Transport;
 using UnityModManagerNet;
 
-namespace ArtOfRallyChampionshipMod
+namespace ArtOfRallyMultiplayerMod
 {
     public static class Main
     {
@@ -24,7 +20,7 @@ namespace ArtOfRallyChampionshipMod
         {
             Logger = modEntry.Logger;
             Settings = UnityModManager.ModSettings.Load<Settings.Settings>(modEntry);
-            Client = new SocketIO("http://localhost:4593/users", new SocketIOOptions
+            Client = new SocketIO($"{Settings.URL}/multiplayer", new SocketIOOptions
             {
                 Transport = TransportProtocol.WebSocket,
                 Reconnection = true
@@ -50,12 +46,6 @@ namespace ArtOfRallyChampionshipMod
             Client.OnConnected += (sender, args) =>
             {
                 Logger.Log("Connected to server!");
-                Client.EmitAsync("carsInfo", JsonConvert.SerializeObject(
-                    CarManager.AllCarsList, new StringEnumConverter()));
-                Client.EmitAsync("stagesInfo", JsonConvert.SerializeObject(
-                    AreaManager.AreaDictionary, new StringEnumConverter()));
-                Client.EmitAsync("translationsGathered", JsonConvert.SerializeObject(
-                    LocalizationManager.Sources, new StringEnumConverter()));
             };
             Client.OnDisconnected += (sender, s) => Logger.Warning("Got disconnected");
             Client.OnReconnectAttempt += (sender, i) => Logger.Log($"Trying to reconnect {i}x");
@@ -67,13 +57,14 @@ namespace ArtOfRallyChampionshipMod
                 MultiplayerConnectionManager.CurrentCar = data.ToNative();
             });
 
+            // TODO: sync map loading progress
             // Multiplayer
-            Client.On(InitiateRally.MultiplayerLoadMap,
+            /*Client.On(InitiateRally.MultiplayerLoadMap,
                 response => InitiateRally.StartRallyRemotely(response.GetValue<LoadMapData>()));
             Client.On(InitiateRally.MultiplayerChangeMap,
                 response => InitiateRally.ChangeMode(response.GetValue<GameModeManager.GAME_MODES>()));
             Client.On(InitiateRally.MultiplayerChangeRally,
-                response => InitiateRally.ChangeRallyData(response.GetValue<string>()));
+                response => InitiateRally.ChangeRallyData(response.GetValue<string>()));*/
             await Client.ConnectAsync();
         }
     }

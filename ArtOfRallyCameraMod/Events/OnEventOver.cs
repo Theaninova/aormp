@@ -4,7 +4,7 @@
 
 using HarmonyLib;
 
-namespace ArtOfRallyChampionshipMod.Events
+namespace ArtOfRallyMultiplayerMod.Events
 {
     [HarmonyPatch(typeof(StageSceneManager), nameof(StageSceneManager.OnEventOver))]
     public class OnEventOver

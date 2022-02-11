@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ArtOfRallyChampionshipMod.Protocol
+namespace ArtOfRallyMultiplayerMod.Protocol
 {
     [Serializable]
     public struct Vec3
@@ -20,6 +20,7 @@ namespace ArtOfRallyChampionshipMod.Protocol
         public float w;
     }
 
+    [Serializable]
     public struct NativeMultiplayerCar
     {
         public Vector3 position;

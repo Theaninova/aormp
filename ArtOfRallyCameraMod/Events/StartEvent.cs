@@ -4,12 +4,12 @@
 
 using HarmonyLib;
 
-namespace ArtOfRallyChampionshipMod.Events
+namespace ArtOfRallyMultiplayerMod.Events
 {
-    [HarmonyPatch(typeof(global::StageSceneManager), nameof(global::StageSceneManager.StartEvent))]
+    [HarmonyPatch(typeof(StageSceneManager), nameof(StageSceneManager.StartEvent))]
     public class StartEvent
     {
-        public static void Postfix(global::StageSceneManager __instance)
+        public static void Postfix(StageSceneManager __instance)
         {
         }
     }

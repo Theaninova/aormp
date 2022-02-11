@@ -4,7 +4,7 @@ using UnityModManagerNet;
 // ReSharper disable ConvertToConstant.Global
 // ReSharper disable FieldCanBeMadeReadOnly.Global
 
-namespace ArtOfRallyChampionshipMod.Settings
+namespace ArtOfRallyMultiplayerMod.Settings
 {
     public class Settings : UnityModManager.ModSettings, IDrawable
     {
