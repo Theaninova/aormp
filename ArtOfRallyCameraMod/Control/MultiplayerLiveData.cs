@@ -38,6 +38,7 @@ namespace ArtOfRallyMultiplayerMod.Control
             bool ____createdGhost)
         {
             if (!Main.Settings.EnableMultiplayer) return true;
+            if (GameEntryPoint.EventManager.status != EventStatusEnums.EventStatus.UNDERWAY) return false;
 
             Shader.SetGlobalVector(____playerPosition,
                 GameEntryPoint.EventManager.playerManager.PlayerObject.transform.position);
