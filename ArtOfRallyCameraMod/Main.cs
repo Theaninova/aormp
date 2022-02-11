@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using ArtOfRallyMultiplayerMod.Control;
 using ArtOfRallyMultiplayerMod.Protocol;
 using HarmonyLib;
@@ -30,7 +31,7 @@ namespace ArtOfRallyMultiplayerMod
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
             // modEntry.OnUpdate = CameraHandler.OnUpdate;
-            // modEntry.OnFixedGUI = EditorGUI.OnFixedGUI;
+            modEntry.OnFixedGUI = entry => MultiplayerHUD.Draw();
             modEntry.OnGUI = entry => Settings.Draw(entry);
             modEntry.OnSaveGUI = entry => Settings.Save(entry);
 
@@ -46,17 +47,25 @@ namespace ArtOfRallyMultiplayerMod
             Client.OnConnected += (sender, args) =>
             {
                 Logger.Log("Connected to server!");
+                if (Settings.EnableMultiplayer)
+                {
+                    Client.EmitAsync("joinLobby", Settings.MultiplayerLobby);
+                }
             };
             Client.OnDisconnected += (sender, s) => Logger.Warning("Got disconnected");
             Client.OnReconnectAttempt += (sender, i) => Logger.Log($"Trying to reconnect {i}x");
 
-            Client.On("replayReceived", response =>
+            Client.On("replayUpdated", response =>
             {
                 var data = response.GetValue<MultiplayerCar>();
                 MultiplayerConnectionManager.LastCar = MultiplayerConnectionManager.CurrentCar;
                 MultiplayerConnectionManager.CurrentCar = data.ToNative();
             });
 
+            Client.On("playersUpdated", response =>
+            {
+                MultiplayerHUD.Players = response.GetValue<string[]>();
+            });
             // TODO: sync map loading progress
             // Multiplayer
             /*Client.On(InitiateRally.MultiplayerLoadMap,

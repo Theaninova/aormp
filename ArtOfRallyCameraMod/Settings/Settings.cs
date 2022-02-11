@@ -22,10 +22,16 @@ namespace ArtOfRallyMultiplayerMod.Settings
         {
             Save(this, modEntry);
         }
-
         public void OnChange()
         {
-            
+            if (EnableMultiplayer)
+            {
+                Main.Client.EmitAsync("joinLobby", MultiplayerLobby);
+            }
+            else
+            {
+                Main.Client.EmitAsync("leaveLobby");
+            }
         }
     }
 }
