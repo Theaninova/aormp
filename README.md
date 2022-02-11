@@ -39,6 +39,18 @@ Go to `[Game DIR]/Mods/MultiplayerMod/Settings.xml` and edit the
 `<URL>` tag's content. DO NOT add a trailing `/` to the URL.
 
 Default server hosted by me is `http://h2862963.stratoserver.net:4593`
+and hosted in Berlin, Germany
+
+Expected ping:
+
+| Location                | Min   | Avg   | Max   |
+|-------------------------|-------|-------|-------|
+| 🇦🇺 Australia, Perth   | 342.3 | 342.7 | 343.2 |
+| 🇦🇹 Austria, Salzburg  | 21.2  | 21.3  | 21.5  |
+| 🇨🇦 Canada, Toronto    | 109.5 | 109.7 | 110.0 |
+| 🇩🇪 Germany, Frankfurt | 10.9  | 11.2  | 12.2  |
+| 🇺🇸 USA, New Jersey    | 88.7  |  89.8 | 91.0  |
+
 
 ## Using the mod in-game
 
