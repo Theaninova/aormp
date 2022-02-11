@@ -2,6 +2,10 @@
 using System.Xml.Serialization;
 using HarmonyLib;
 
+// ReSharper disable UnusedType.Global
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
+
 namespace ArtOfRallyMultiplayerMod.Control
 {
     public static class InitiateRally
