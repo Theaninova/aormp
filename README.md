@@ -33,6 +33,13 @@ server which forwards them to one or more observers.
 1. Download the client and install it using the [Unity Mod Manager](https://www.nexusmods.com/site/mods/21/)
 2. *optional* Download the server for self-hosting
 
+### Change Server
+
+Go to `[Game DIR]/Mods/MultiplayerMod/Settings.xml` and edit the
+`<URL>` tag's content. DO NOT add a trailing `/` to the URL.
+
+Default server hosted by me is `http://h2862963.stratoserver.net:4593`
+
 ## Using the mod in-game
 
 1. Make sure multiplayer is enabled in the mod options

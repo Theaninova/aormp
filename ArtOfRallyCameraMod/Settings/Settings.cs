@@ -9,7 +9,7 @@ namespace ArtOfRallyMultiplayerMod.Settings
     public class Settings : UnityModManager.ModSettings, IDrawable
     {
         [Draw("Server URL")]
-        public string URL = "http://localhost:4593";
+        public string URL = "http://h2862963.stratoserver.net:4593";
 
         [Header("Multiplayer")]
         [Draw("Enable Multiplayer")] public bool EnableMultiplayer = false;
