@@ -3,6 +3,7 @@
 // ReSharper disable InconsistentNaming
 
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using HarmonyLib;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace ArtOfRallyMultiplayerMod.Events
     public static class Data
     {
         public static readonly int GhostEnabledHandle = Shader.PropertyToID("_ghostEnabled");
+
+        public static bool HasStarted = false;
 
         public static GhostManager.GhostData_native data = new GhostManager.GhostData_native
         {
@@ -35,17 +38,33 @@ namespace ArtOfRallyMultiplayerMod.Events
         }
     }
 
-    [HarmonyPatch(typeof(StageSceneManager), nameof(StageSceneManager.StartEvent))]
+    [HarmonyPatch(typeof(PreStageScreen), nameof(PreStageScreen.StartStage))]
     public class StartEvent
     {
-        public static void Prefix(StageSceneManager __instance, bool __0)
+        public static void Prefix(PreStageScreen __instance)
         {
-            Main.Client.EmitAsync("startEvent", __0);
+            if (!Main.Settings.EnableMultiplayer) return;
+            
+            Data.HasStarted = true;
+            /*var index = __instance.GhostSelectable.ghostList.Count > 0 TODO
+                ? __instance.GhostSelectable.ghostList.First()
+                : 0;
+            GhostManager.Instance.SetGhostType(index);*/
+            Main.Client.EmitAsync("startEvent");
 
             // Shader.SetGlobalInt(Data.GhostEnabledHandle, 1);
             // GhostManager.Instance.SetGlobalGhostData(Data.ObjectToByteArray(Data.data));
             // GhostManager.Instance.SetGhostType(3);
             // GhostManager.Instance.ToggleGhost(true);
+        }
+    }
+
+    [HarmonyPatch(typeof(PreStageScreen), "Start")]
+    public class Start
+    {
+        public static void Postfix()
+        {
+            Data.HasStarted = false;
         }
     }
 }

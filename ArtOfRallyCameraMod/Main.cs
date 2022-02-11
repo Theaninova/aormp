@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Reflection;
 using ArtOfRallyMultiplayerMod.Control;
+using ArtOfRallyMultiplayerMod.Events;
 using ArtOfRallyMultiplayerMod.Protocol;
 using HarmonyLib;
 using SocketIOClient;
@@ -68,8 +69,10 @@ namespace ArtOfRallyMultiplayerMod
             });
             Client.On("startEvent", response =>
             {
-                if (GameEntryPoint.EventManager.status == EventStatusEnums.EventStatus.WAITING_TO_BEGIN) return;
-                GameEntryPoint.EventManager.StartEvent(response.GetValue<bool>());
+                if (Data.HasStarted) return;
+                var eventManager = GameEntryPoint.EventManager;
+                if (eventManager.status == EventStatusEnums.EventStatus.WAITING_TO_BEGIN) return;
+                eventManager.preStageScreen.StartStage();
             });
             // TODO: sync map loading progress
             // Multiplayer
